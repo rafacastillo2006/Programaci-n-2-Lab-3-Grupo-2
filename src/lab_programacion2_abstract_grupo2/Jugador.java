@@ -36,7 +36,8 @@ public class Jugador {
     public void pausaTurno(){
         if(this.inicioTurno > 0){
             this.tiempoAcumulado += (System.currentTimeMillis() - this.inicioTurno);
-        }this.inicioTurno=0;
+        }
+        this.inicioTurno=0;
     }
     
     public long getTiempoEnSegundos(){
