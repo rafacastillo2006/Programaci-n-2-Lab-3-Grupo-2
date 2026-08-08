@@ -27,7 +27,7 @@ public class CartaAbilidad extends Cartas{
    
     public void aplicarHabilidad(Jugador jugador){
         if (jugador!=null){
-            jugador.pausaTurno();
+            jugador.modificarTimepo(this.segundos);
         }
     }
     

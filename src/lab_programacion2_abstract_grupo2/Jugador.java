@@ -42,4 +42,11 @@ public class Jugador {
     public long getTiempoEnSegundos(){
         return tiempoAcumulado / 1000;
     }
+    
+    public void modificarTimepo(int segundos){
+        this.tiempoAcumulado+=(segundos*1000L);
+        if (this.tiempoAcumulado<0){
+            this.tiempoAcumulado=0;
+        }
+    }
 }
