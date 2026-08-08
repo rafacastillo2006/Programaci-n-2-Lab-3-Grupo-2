@@ -11,7 +11,7 @@ public class Jugador {
     private long tiempoAcumulado;
     private long inicioTurno;
     
-    public Jugador(){
+    public Jugador(String nombre){
         this.nombre = nombre;
         this.puntosPartida = 0;
         this.tiempoAcumulado = 0;
