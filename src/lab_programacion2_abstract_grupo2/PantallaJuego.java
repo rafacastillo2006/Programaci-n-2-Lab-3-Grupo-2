@@ -98,16 +98,23 @@ public class PantallaJuego extends JPanel{
             for (int c = 0; c < 6; c++) {
                 Cartas carta = logica.getCartaEn(f, c);
                 JButton boton = botonesJuego[f][c];
-
-                if (carta.isEmparejada()) {
-                    boton.setText(carta.getCodigo());
+            
+                if (carta.isEmparejada() || carta.isDescubierta()) {
+                    if (carta instanceof CartaNormal) {
+                        boton.setText(((CartaNormal) carta).getNombre());
+                }
+                else{
+                boton.setText(carta.getCodigo());
+                }
+                
+                if(carta.isEmparejada()){
                     boton.setEnabled(false);
                     boton.setBackground(Color.LIGHT_GRAY);
-                } else if (carta.isDescubierta()) {
-                    boton.setText(carta.getCodigo());
+                }else{
                     boton.setEnabled(true);
                     boton.setBackground(Color.WHITE);
-                } else {
+                }
+                }else{
                     boton.setText("?");
                     boton.setEnabled(true);
                     boton.setBackground(null);

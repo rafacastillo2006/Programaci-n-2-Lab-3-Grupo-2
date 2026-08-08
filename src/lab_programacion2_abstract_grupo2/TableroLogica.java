@@ -27,40 +27,37 @@ public class TableroLogica {
 
 
     public void iniciarJuego() {
+    ArrayList<Cartas> mazo = new ArrayList<>();
 
-        ArrayList<Cartas> mazo = new ArrayList<>();
+    // Lista de 18 nombres de Pokémon
+    String[] pokemones = {"Pikachu", "Charmander", "Squirtle", "Bulbasaur", "Eevee","Gengar", "Mewtwo", "Snorlax", "Jigglypuff", "Psyduck","Lucario", "Charizard", "Blastoise", "Venusaur", "Dragonite","Togepi", "Meowth", "Magikarp"
+    };
 
-        for (int i = 1; i <= 18; i++) {
-            String nombreCarta = "Carta " + i; 
-            String codigoCarta = String.valueOf(i);
-            
-            mazo.add(new CartaNormal(nombreCarta, codigoCarta));
-            mazo.add(new CartaNormal(nombreCarta, codigoCarta));
+    for (int i = 0; i < 18; i++) {
+        String pokemon = pokemones[i];
+        mazo.add(new CartaNormal(pokemon, pokemon));
+        mazo.add(new CartaNormal(pokemon, pokemon));
+    }
+
+    for (int i = 0; i < mazo.size(); i++) {
+        int posicionAleatoria = (int) (Math.random() * mazo.size());
+        Cartas cartaTemporal = mazo.get(i);
+        mazo.set(i, mazo.get(posicionAleatoria));
+        mazo.set(posicionAleatoria, cartaTemporal);
+    }
+
+    int posicion = 0;
+    for (int fila = 0; fila < 6; fila++) {
+        for (int columna = 0; columna < 6; columna++) {
+            tablero[fila][columna] = mazo.get(posicion);
+            posicion++;
         }
+    }
 
-        for (int i = 0; i < mazo.size(); i++) {
-            int posicionAleatoria = (int) (Math.random() * mazo.size());
-            
-            Cartas cartaTemporal = mazo.get(i);
-            mazo.set(i, mazo.get(posicionAleatoria));
-            mazo.set(posicionAleatoria, cartaTemporal);
-        }
-
-        int posicion = 0;
-
-        for (int fila = 0; fila < 6; fila++) {
-            for (int columna = 0; columna < 6; columna++) {
-
-                tablero[fila][columna] = mazo.get(posicion);
-                posicion++;
-            }
-        }
-
-        primeraSeleccion = null;
-        segundaSeleccion = null;
-        jugadorActual = jugador1;
-        
-        jugadorActual.iniciarTurno();
+    primeraSeleccion = null;
+    segundaSeleccion = null;
+    jugadorActual = jugador1;
+    jugadorActual.iniciarTurno();
     }
 
     public void seleccionarCarta(int fila, int columna) {
