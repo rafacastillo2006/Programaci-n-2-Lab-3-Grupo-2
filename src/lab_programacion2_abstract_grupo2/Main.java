@@ -1,13 +1,13 @@
+
 package lab_programacion2_abstract_grupo2;
 
 import javax.swing.SwingUtilities;
 
-public class Lab_Programacion2_abstract_Grupo2 {
 
+public class Main {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
-            MainWindow ventana = new MainWindow();
-            ventana.setVisible(true);
+            new MainWindow().setVisible(true);
         });
     }
 }

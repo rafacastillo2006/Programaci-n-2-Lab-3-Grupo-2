@@ -1,11 +1,9 @@
-
 package lab_programacion2_abstract_grupo2;
 
 import javax.swing.*;
 import java.awt.*;
 
-
-public class PantallaConfiguracion extends JPanel{
+public class PantallaConfiguracion extends JPanel {
     
     private final MainWindow ventanaPrincipal;
     
@@ -13,12 +11,12 @@ public class PantallaConfiguracion extends JPanel{
     private JTextField campoJugador2;
     private JButton botonJugar;
     
-    public PantallaConfiguracion(MainWindow ventanaPrincipal){
-    this.ventanaPrincipal = ventanaPrincipal;
-    configurarPanel();
+    public PantallaConfiguracion(MainWindow ventanaPrincipal) {
+        this.ventanaPrincipal = ventanaPrincipal;
+        configurarPanel();
     }
     
-    private void configurarPanel(){
+    private void configurarPanel() {
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(10, 10, 10, 10);
@@ -33,23 +31,24 @@ public class PantallaConfiguracion extends JPanel{
         campoJugador2 = new JTextField(15);
         botonJugar = new JButton("Jugar!");
         botonJugar.addActionListener(e -> {
-        
-        String nombreJugador1 = campoJugador1.getText().trim();
-        String nombreJugador2 = campoJugador2.getText().trim();
-        String mensajeError = validarNombres(nombreJugador1, nombreJugador2);
-            if (mensajeError!=null) {
-                JOptionPane.showMessageDialog(this, mensajeError, "Datos incompletos", JOptionPane.WARNING_MESSAGE);
-                return;
+            
+            String nombreJugador1 = campoJugador1.getText().trim();
+            String nombreJugador2 = campoJugador2.getText().trim();
+            
+            try {
+                validarNombres(nombreJugador1, nombreJugador2);
+                ventanaPrincipal.iniciarJuego(nombreJugador1, nombreJugador2);
+                campoJugador1.setText("");
+                campoJugador2.setText("");
+                
+            } catch (DatosIncompletosException ex) {
+                JOptionPane.showMessageDialog(this, ex.getMessage(), "Datos incompletos", JOptionPane.WARNING_MESSAGE);
             }
             
-            ventanaPrincipal.iniciarJuego(nombreJugador1, nombreJugador2);
-            campoJugador1.setText("");
-            campoJugador2.setText("");
-            
         });
-        
+
         //gbc 
-         gbc.gridy = 0;
+        gbc.gridy = 0;
         add(titulo, gbc);
         gbc.gridy = 1;
         add(labelJugador1, gbc);
@@ -63,19 +62,22 @@ public class PantallaConfiguracion extends JPanel{
         add(botonJugar, gbc);
         
     }
-    private String validarNombres(String nombreJugador1, String nombreJugador2){
-    boolean faltaP1 = nombreJugador1.isEmpty();
-    boolean faltaP2 = nombreJugador2.isEmpty();
-    
+
+    private void validarNombres(String nombreJugador1, String nombreJugador2) 
+            throws DatosIncompletosException {
+        boolean faltaP1 = nombreJugador1.isEmpty();
+        boolean faltaP2 = nombreJugador2.isEmpty();
+        
         if (faltaP1 && faltaP2) {
-            return "Debes ingresar el nombre de los 2 jugadores";
+            throw new DatosIncompletosException(
+            "Debes ingresar el nombre de los 2 jugadores");
         } else if (faltaP1) {
-            return "Falta ingresar el nombre de jugador 1";
+            throw new DatosIncompletosException(
+            "Debes ingresar el nombre de jugador 1");
         } else if (faltaP2) {
-            return "Falta ingresar el nombre de jugador 2";
+            throw new DatosIncompletosException(
+            "Debes ingresar el nombre de jugador 2");
         }
-        return null;
     }
-    
     
 }
