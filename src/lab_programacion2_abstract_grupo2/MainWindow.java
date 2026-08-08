@@ -11,7 +11,7 @@ public class MainWindow extends JFrame{
     
     private CardLayout cardLayout;
     private JPanel panelContenedor;
-    //private PantallaJuego pantallaJuego;
+    private PantallaJuego pantallaJuego;
     
     public MainWindow(){
         setTitle("Juego De Memoria Pokemon");
@@ -24,7 +24,7 @@ public class MainWindow extends JFrame{
         cardLayout = new CardLayout();
         panelContenedor = new JPanel(cardLayout);
         PantallaConfiguracion pantallaConfiguracion = new PantallaConfiguracion(this);
-        //pantallaJuego = new PantallaJuego();
+        pantallaJuego = new PantallaJuego();
         
         panelContenedor.add(pantallaConfiguracion, pantalla_config);
         //panelContenedor.add(pantallaJuego, pantalla_juego);
@@ -39,7 +39,7 @@ public class MainWindow extends JFrame{
     }
     
     public void iniciarJuego(String nombrep1, String nombrep2){
-   // pantallaJuego.configurarJugadores(nombrep1, nombrep2);
+    pantallaJuego.configurarJugadores(nombrep1, nombrep2);
         mostrarPantalla(pantalla_juego);
     }
 }

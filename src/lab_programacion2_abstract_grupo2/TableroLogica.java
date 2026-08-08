@@ -25,7 +25,7 @@ public class TableroLogica implements ControlPartida, ControlTurnos {
         segundaSeleccion = null;
     }
 
-    @Override
+
     public void iniciarJuego() {
 
         ArrayList<Cartas> mazo = new ArrayList<>();
@@ -103,7 +103,7 @@ public class TableroLogica implements ControlPartida, ControlTurnos {
         );
     }
 
-    @Override
+
     public boolean verificarPareja(Cartas c1, Cartas c2) {
         
         if (c1 == null || c2 == null) {
@@ -144,7 +144,7 @@ public class TableroLogica implements ControlPartida, ControlTurnos {
         }
     }
 
-    @Override
+
     public void cambiarTurno() {
         
         jugadorActual.pausaTurno();
@@ -158,7 +158,7 @@ public class TableroLogica implements ControlPartida, ControlTurnos {
         jugadorActual.iniciarTurno();
     }
 
-    @Override
+
     public boolean verificarFinPartida() {
 
         for (int fila = 0; fila < 6; fila++) {
